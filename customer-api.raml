@@ -8,14 +8,14 @@ uses:
   Customers: lib/customers.raml
 
 securitySchemes:
-  customTokenSecurity: !include security/secure.raml
+  outh2Security: !include security/outh2-security.raml
 
 traits:
   paged: !include traits/pageable.raml
   cached: !include traits/cacheable.raml
 
 /customers
-    securedBy: [customTokenSecurity]
+    securedBy: [outh2Security]
     is: [paged, cached]
     get:
       description: Returns all customers.
@@ -38,7 +38,7 @@ traits:
                 type: Customers.customers
                 example: !include examples/customers.json
 
-    securedBy: [customTokenSecurity]
+    securedBy: [outh2Security]
     is: [cached]
     post:
         description: Create a new single Customer.
@@ -53,7 +53,7 @@ traits:
             body:  Customer already exists with same id.
 
     /{id}
-        securedBy: [customTokenSecurity]
+        securedBy: [outh2Security]
         is: [cached]
         get:
           description: Returns a customer with {id}.

@@ -17,11 +17,9 @@ The "lib" folder in the root directory contains the type definitions used in the
 
 The "customers.raml" file defines  two types named customer and customers.
 
-The "security" folder contains the custom security definition.
+The "security" folder contains the OAUth and custom security definitions. Here we use only OAuth security for API.
 
 The "traits" folder contains the traits used in the API definition.
-
-The "traits/secure.raml" defines the security header required to call the API. Here a JWT token is expected in the Header to invoke all the APIs. The APIs protected with "secured" trait will return a 401 HTTP response, if a valid token is not found.
 
 The "traits/pageable.raml" defines the pagination details required as a query parameter. It expects a "page" and "per_page" parameters to define page number and records per page respectively. This query parameters are applied to GET request which tries to read all customer data. This trait prevents consumers from reading large volume of data at an instant by enforcing pagination.
 
@@ -59,8 +57,12 @@ The APIs follow best practices in RESTful API design. The 'examples' folder cont
 The order JSON files defines relationship to customer entity. A JSON link provides a URL to access the related resource.
 For example Order ID 3125 is related to customer ID 1001. The API provider is expected to provide navigable links to associated resources in the body of the HTTP response message. This will help the consumer to make less calls to get a customer data for an order id. similarly the product to order relationship is defined in "product.json".
 
-The design tries to balance the trade-off between Chatty I/O (Too many requests needed to fetch a resource) and Extraneous Fetching (fetching bulky data that the client doesn't need). More details on Chatty I/O and  Extraneous Fetching anti patters can be found here  https://docs.microsoft.com/en-us/azure/architecture/antipatterns/chatty-io/index and https://docs.microsoft.com/en-us/azure/architecture/antipatterns/extraneous-fetching/index
+The design tries to balance the trade-off between Chatty I/O (Too many requests needed to fetch a resource) and Extraneous Fetching (fetching bulky data that the client doesn't need).
+More details on Chatty I/O and  Extraneous Fetching anti patters can be found here  https://docs.microsoft.com/en-us/azure/architecture/antipatterns/chatty-io/index and https://docs.microsoft.com/en-us/azure/architecture/antipatterns/extraneous-fetching/index
 
-This design uses custom security to secure the APIs instead of OAuth 2.0 for simplicity.
+This design uses OAuth 2.0 security policy. Here only "implicit" grant type is used instead of "Authorization code" grant type.
+Authorization code grant types require a two stage authentication process, which would be not suitable for consumers like mobile apps. Also the consumers may be single page web apps or mobile apps, which cannot keep a client secret because all of the application code and storage is easily accessible.
 
-RAML types are used instead of JSON and XML schemas. RAML 1.0 introduces the notion of data types, which provide a concise and powerful way of describing the data in an API. The RAML type syntax, is designed to be considerably easier and more succinct than JSON and XML schemas while retaining their flexibility and expressiveness.
+A custom security policy is also provided for demo purpose, although it is not used in this API design.
+
+RAML types are used instead of JSON and XML schemas in the design. RAML 1.0 introduces the notion of data types, which provide a concise and powerful way of describing the data in an API. The RAML type syntax, is designed to be considerably easier and more succinct than JSON and XML schemas while retaining their flexibility and expressiveness.

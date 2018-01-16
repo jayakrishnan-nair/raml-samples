@@ -6,7 +6,7 @@ uses:
   Orders: lib/orders.raml
 
 /customers/{id}/orders
-    securedBy: [customTokenSecurity]
+    securedBy: [outh2Security]
     is: [cached, paged]
     get:
       description: Returns all orders for the customer  with {id}
@@ -31,7 +31,7 @@ uses:
           body:  Order already exists with same order id.
 
     /{id}
-        securedBy: [customTokenSecurity]
+        securedBy: [outh2Security]
         is: [cached]
         get:
           description: Returns a order with {id}.
