@@ -62,3 +62,5 @@ For example Order ID 3125 is related to customer ID 1001. The API provider is ex
 The design tries to balance the trade-off between Chatty I/O (Too many requests needed to fetch a resource) and Extraneous Fetching (fetching bulky data that the client doesn't need). More details on Chatty I/O and  Extraneous Fetching anti patters can be found here  https://docs.microsoft.com/en-us/azure/architecture/antipatterns/chatty-io/index and https://docs.microsoft.com/en-us/azure/architecture/antipatterns/extraneous-fetching/index
 
 This design uses custom security to secure the APIs instead of OAuth 2.0 for simplicity.
+
+RAML types are used instead of JSON and XML schemas. RAML 1.0 introduces the notion of data types, which provide a concise and powerful way of describing the data in an API. The RAML type syntax, is designed to be considerably easier and more succinct than JSON and XML schemas while retaining their flexibility and expressiveness.
