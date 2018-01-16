@@ -1,0 +1,31 @@
+#%RAML 1.0 Trait
+usage: Apply this trait to a GET method that supports caching
+
+headers:
+  If-None-Match?:
+    type: string
+    description: |
+      Requests the resource.
+    example: 686897696a7c876b7e
+responses:
+  200:
+    description: |
+      The resource has been modified. New data is given.
+    headers:
+      ETag:
+        type: string
+        example: 8876546696a7c876b7e
+      Cache-Control:
+        type: string
+        example: private, max-age=300000
+  304:
+    description: |
+      The resource has not been modified, the body is empty and the version cached by the API
+      consumer client may be used.
+    headers:
+      ETag:
+        type: string
+        example: 6876546696a7c876b7e
+      Cache-Control:
+        type: string
+        example: private, max-age=300000

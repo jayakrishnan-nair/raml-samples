@@ -1,0 +1,22 @@
+#%RAML 1.0 Library
+usage: Data types for the Product API
+types:
+  product:
+    properties:
+      productID :
+        required: true
+        type: string
+      productName:
+        required: true
+        type: string
+      quantity:
+        required: true
+        type: integer
+      price:
+        required: true
+        type: number
+        format: float
+  products:
+    type: order[]
+    minItems: 1
+    uniqueItems: true

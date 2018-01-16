@@ -1,0 +1,77 @@
+#%RAML 1.0
+title: customer
+baseUri: http://www.test.com/sample/{version}
+version: v1
+mediaType: application/json
+
+uses:
+  Customers: lib/customers.raml
+
+traits:
+  secured: !include traits/secure.raml
+  paged: !include traits/pageable.raml
+  cached: !include traits/cacheable.raml
+
+/customers
+    is: [secured, paged, cached]
+    get:
+      description: Returns all customers.
+      queryParameters:
+        postCode:
+          type: string
+          description: use to query all customers in an area(postCode)
+          required: false
+          example: "2135"
+      responses:
+          200:
+            body:
+              application/json:
+                type: Customers.customers
+                example: !include examples/customers.json
+
+    is: [secured, cached]
+    post:
+        description: Create a new single Customer.
+        body:
+          application/json:
+            type: Customers.customer
+            example: !include examples/customer.json
+        responses:
+          201:
+            description: New Customer created
+          409:
+            body:  Customer already exists with same id.
+
+    /{id}
+        is: [secured, cached]
+        get:
+          description: Returns a customer with {id}.
+          responses:
+              200:
+                body:
+                  application/json:
+                    type: Customers.customer
+                    example: !include examples/customer.json
+              404:
+                body: Customer not found.
+        put:
+            description: Update a Customer by id
+            body:
+              application/json:
+                type: Customers.customer
+                example: !include examples/customer.json
+            responses:
+              200:
+                body:
+                  application/json:
+                    type: customer
+                    example: !include examples/customer.json
+              404:
+                description: Customer not found.
+        delete:
+              description: Delete a Customer by id
+              responses:
+                200:
+                  description: Customer successfully deleted
+                404:
+                  description: Customer not found.

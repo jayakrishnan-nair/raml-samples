@@ -1,0 +1,63 @@
+#%RAML 1.0 Extension
+usage: Add product functionality
+extends: order-api.raml
+
+uses:
+  Products: lib/products.raml
+
+  /orders/{id}/products
+    is: [secured, cached, paged]
+    get:
+      description: Returns all products in the order  with {id}
+      responses:
+        200:
+          body:
+            application/json:
+              type: Products.products
+              example: !include examples/products.json
+        404:
+          body: Products not found for this order.
+
+    is: [secured, cached]
+    post:
+      description: Add a new product to a order with {id}
+      body:
+        application/json:
+          type: Products.product
+          example: !include examples/product.json
+      responses:
+        201:
+          description: New product created
+        409:
+          body:  Product already exists with same product id.
+          
+    /{id}
+        is: [secured, cached]
+        get:
+          description: Returns a product with {id}.
+          responses:
+              200:
+                body:
+                  application/json:
+                    type: Products.product
+                    example: !include examples/product.json
+              404:
+                body: Customer not found.
+        put:
+          description: update a product in an order
+          body:
+            application/json:
+              type: Products.product
+              example: !include examples/product.json
+          responses:
+            200:
+              description: Order updated successfully
+            404:
+              description: Order not found for customer.
+        delete:
+          description: Remove a product in the order
+          responses:
+            200:
+              description: Product successfully deleted in the order
+            404:
+              description: Order not found.

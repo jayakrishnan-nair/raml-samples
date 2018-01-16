@@ -1,0 +1,52 @@
+[
+  {
+      "productID": "20123",
+      "productName": "prod1",
+      "quantity":4,
+      "price": 12.60,
+      "links":[
+        {
+          "rel":"order",
+          "href":"http://www.test.com/sample/v1/customers/1001/orders/3125",
+          "action":"GET",
+          "types":["application/json"]
+        },
+        {
+          "rel":"order",
+          "href":"http://www.test.com/sample/v1/customers/1001/orders/3125",
+          "action":"PUT",
+          "types":[]
+        },
+        {
+          "rel":"order",
+          "href":"http://www.test.com/sample/v1/customers/1001/orders/3125",
+          "action":"DELETE",
+          "types":[]
+        }]
+  },
+  {
+      "productID": "12445",
+      "productName": "prod2",
+      "quantity":4,
+      "price": 12.60,
+      "links":[
+        {
+          "rel":"order",
+          "href":"http://www.test.com/sample/v1/customers/1001/orders/3125",
+          "action":"GET",
+          "types":["application/json"]
+        },
+        {
+          "rel":"order",
+          "href":"http://www.test.com/sample/v1/customers/1001/orders/3125",
+          "action":"PUT",
+          "types":[]
+        },
+        {
+          "rel":"order",
+          "href":"http://www.test.com/sample/v1/customers/1001/orders/3125",
+          "action":"DELETE",
+          "types":[]
+        }]
+  }
+]

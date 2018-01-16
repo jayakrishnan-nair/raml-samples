@@ -1,0 +1,18 @@
+[
+  {
+    "id" : "1001",
+    "firstName" : "jay",
+    "lastName" : "krish",
+    "streetAddressaddress" : "76 Albert Road",
+    "area": "strathfeild",
+    "postCode": "2135"
+  },
+  {
+    "id" : "1002",
+    "firstName" : "karlo",
+    "lastName" : "diamante",
+    "streetAddressaddress" : "225 George Street",
+    "area": "sydney",
+    "postCode": "2000"
+  },
+]

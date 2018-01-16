@@ -1,0 +1,16 @@
+#%RAML 1.0 Library
+usage: Data types for the Order API
+types:
+  order:
+    properties:
+      orderID :
+        required: true
+        type: string
+      orderValue:
+        required: true
+        type: number
+        format: float
+  orders:
+    type: order[]
+    minItems: 1
+    uniqueItems: true

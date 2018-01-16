@@ -1,0 +1,48 @@
+[
+  {
+  "orderID":"3125",
+  "orderValue":16.60,
+  "links":[
+    {
+      "rel":"customer",
+      "href":"http://www.test.com/sample/v1/customers/1001",
+      "action":"GET",
+      "types":["application/json"]
+    },
+    {
+      "rel":"customer",
+      "href":"http://www.test.com/sample/v1/customers/1001",
+      "action":"PUT",
+      "types":[]
+    },
+    {
+      "rel":"customer",
+      "href":"http://www.test.com/sample/v1/customers/1001",
+      "action":"DELETE",
+      "types":[]
+    }]
+},
+{
+  "orderID":"4352",
+  "orderValue":16.60,
+  "links":[
+    {
+      "rel":"customer",
+      "href":"http://www.test.com/sample/v1/customers/1001",
+      "action":"GET",
+      "types":["application/json"]
+    },
+    {
+      "rel":"customer",
+      "href":"http://www.test.com/sample/v1/customers/1001",
+      "action":"PUT",
+      "types":[]
+    },
+    {
+      "rel":"customer",
+      "href":"http://www.test.com/sample/v1/customers/1001",
+      "action":"DELETE",
+      "types":[]
+    }]
+  }
+]

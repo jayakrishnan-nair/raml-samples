@@ -1,0 +1,26 @@
+#%RAML 1.0 Library
+usage: Data types for the Customer API
+types:
+  customer:
+    properties:
+      id :
+        required: true
+        type: string
+      firstName:
+        required: true
+        type: string
+      lastName:
+        required: true
+        type: string
+      streetAddress:
+        required: true
+        type: string
+      suburb:
+        required: true
+        type: string
+      postCode: true
+        type: string
+  customers:
+    type: customer[]
+    minItems: 1
+    uniqueItems: true

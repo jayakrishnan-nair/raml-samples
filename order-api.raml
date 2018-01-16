@@ -1,0 +1,62 @@
+#%RAML 1.0 Extension
+usage: Add Orders functionality
+extends: customer-api.raml
+
+uses:
+  Orders: lib/orders.raml
+
+/customers/{id}/orders
+    is: [secured, cached, paged]
+    get:
+      description: Returns all orders for the customer  with {id}
+      responses:
+        200:
+          body:
+            application/json:
+              type: Orders.orders
+              example: !include examples/orders.json
+        404:
+          body: Order not found for this customer.
+    post:
+      description: Add a new order for a customer
+      body:
+        application/json:
+          type: Orders.order
+          example: !include examples/order.json
+      responses:
+        201:
+          description: New Order created
+        409:
+          body:  Order already exists with same order id.
+          
+    /{id}
+        is: [secured, cached]
+        get:
+          description: Returns a order with {id}.
+          responses:
+              200:
+                body:
+                  application/json:
+                    type: Orders.order
+                    example: !include examples/order.json
+              404:
+                body: Customer not found.
+        is: [secured, cached]
+        put:
+          description: update order with {id} for a customer
+          body:
+            application/json:
+              type: Orders.order
+              example: !include examples/order.json
+          responses:
+            200:
+              description: Order updated successfully
+            404:
+              description: Order not found for customer.
+        delete:
+          description: Remove order with {id} for the customer
+          responses:
+            200:
+              description: Order successfully deleted for the customer
+            404:
+              description: Customer not found.
