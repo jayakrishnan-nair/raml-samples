@@ -7,13 +7,16 @@ mediaType: application/json
 uses:
   Customers: lib/customers.raml
 
+securitySchemes:
+  customTokenSecurity: !include security/secure.raml
+
 traits:
-  secured: !include traits/secure.raml
   paged: !include traits/pageable.raml
   cached: !include traits/cacheable.raml
 
 /customers
-    is: [secured, paged, cached]
+    securedBy: [customTokenSecurity]
+    is: [paged, cached]
     get:
       description: Returns all customers.
       queryParameters:
@@ -22,6 +25,12 @@ traits:
           description: use to query all customers in an area(postCode)
           required: false
           example: "2135"
+      queryParameters:
+        lastName:
+          type: string
+          description: use to query customers with a last name
+          required: false
+          example: "krish"
       responses:
           200:
             body:
@@ -29,7 +38,8 @@ traits:
                 type: Customers.customers
                 example: !include examples/customers.json
 
-    is: [secured, cached]
+    securedBy: [customTokenSecurity]
+    is: [cached]
     post:
         description: Create a new single Customer.
         body:
@@ -43,7 +53,8 @@ traits:
             body:  Customer already exists with same id.
 
     /{id}
-        is: [secured, cached]
+        securedBy: [customTokenSecurity]
+        is: [cached]
         get:
           description: Returns a customer with {id}.
           responses:

@@ -6,7 +6,8 @@ uses:
   Products: lib/products.raml
 
   /orders/{id}/products
-    is: [secured, cached, paged]
+    securedBy: [customTokenSecurity]
+    is: [cached, paged]
     get:
       description: Returns all products in the order  with {id}
       responses:
@@ -30,9 +31,10 @@ uses:
           description: New product created
         409:
           body:  Product already exists with same product id.
-          
+
     /{id}
-        is: [secured, cached]
+        securedBy: [customTokenSecurity]
+        is: [cached]
         get:
           description: Returns a product with {id}.
           responses:
