@@ -4,20 +4,19 @@ baseUri: http://www.test.com/sample/{version}
 version: v1
 mediaType: application/json
 
+securitySchemes:
+  outh2Security: !include security/oauth2-security.raml
 uses:
   Customers: lib/customers.raml
 
-securitySchemes:
-  outh2Security: !include security/outh2-security.raml
-
 traits:
-  paged: !include traits/pageable.raml
+  
   cached: !include traits/cacheable.raml
 
-/customers
+/customers:
     securedBy: [outh2Security]
-    is: [paged, cached]
     get:
+      is: [paged, cached]
       description: Returns all customers.
       queryParameters:
         postCode:
@@ -25,7 +24,6 @@ traits:
           description: use to query all customers in an area(postCode)
           required: false
           example: "2135"
-      queryParameters:
         lastName:
           type: string
           description: use to query customers with a last name
@@ -38,9 +36,8 @@ traits:
                 type: Customers.customers
                 example: !include examples/customers.json
 
-    securedBy: [outh2Security]
-    is: [cached]
     post:
+        is: [cached]
         description: Create a new single Customer.
         body:
           application/json:
@@ -52,7 +49,7 @@ traits:
           409:
             body:  Customer already exists with same id.
 
-    /{id}
+    /{id}:
         securedBy: [outh2Security]
         is: [cached]
         get:
